@@ -6,11 +6,11 @@ import { HomeComponent } from './components/home/home.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-  { path: '**', redirectTo: 'dashboard', pathMatch: 'full'},
-  { path: 'login', component: LoginComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '**', redirectTo: 'home', pathMatch: 'full'},
+  { path: 'login', component: LoginComponent, },
   { path: 'signup', component: SignUpComponent},
-  { path: 'dashboard', component: HomeComponent }
+  { path: 'home', component: HomeComponent }
 ];
 
 @NgModule({
