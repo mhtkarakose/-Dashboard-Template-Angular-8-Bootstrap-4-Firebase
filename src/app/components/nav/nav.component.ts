@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
+  navbarOpen = false;
+ 
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  openCollapse(){
+    this.navbarOpen = !this.navbarOpen;
   }
 
 }
