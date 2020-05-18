@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/user/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -10,7 +11,9 @@ export class NavComponent implements OnInit {
   navbarOpen = false;
  
 
-  constructor() { }
+  constructor(
+    public authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
