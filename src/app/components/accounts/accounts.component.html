@@ -11,8 +11,72 @@
         </div>
     </div>
 
+    <div *ngIf="!show" class="container" style="padding: 3rem 1.5rem;
+    text-align: center;">
 
-    <div class="row">
+        <div class="starter-template">
+            <h1>Let's Start</h1>
+            <p class="lead">Add new account and manage your organizations.</p>
+        </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            Add Account
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" placeholder="Enter email" #userEmail required>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                placeholder="Password" #userPwd required>
+                        </div> 
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" ng-model="checkboxModel.value1" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                              Default checkbox
+                            </label>
+                          </div>
+
+                        <!-- <div class="formGroup">
+                            <input type="email" class="formControl" placeholder="Email Address" #userEmail required>
+                        </div>
+
+                        <div class="formGroup">
+                            <input type="password" class="formControl" placeholder="Password" #userPwd required>
+                        </div> -->
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary"
+                            (click)="accountsService.AddCompanyAndAccount(userEmail.value, userPwd.value, checkboxModel.value1)">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="show" class="row">
         <div class="col-4">
 
             <div class="my-3 p-3 bg-white rounded shadow-sm">

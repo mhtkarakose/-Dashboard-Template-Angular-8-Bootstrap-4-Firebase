@@ -18,6 +18,7 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { AuthService } from './shared/services/user/auth.service';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AccountsComponent } from './components/accounts/accounts.component';
+import { AccountsService } from './shared/services/accounts/accounts.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { AccountsComponent } from './components/accounts/accounts.component';
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AccountsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
