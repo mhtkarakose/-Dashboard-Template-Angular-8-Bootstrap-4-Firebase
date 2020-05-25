@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../user/auth.service';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+declare let alertify: any;
 
 @Injectable({
   providedIn: 'root'
@@ -10,26 +12,43 @@ import { map } from 'rxjs/operators';
 export class AccountsService {
 
   private dbPath = '/companies';
- 
+
   ref: AngularFirestoreCollection<any> = null;
 
-  user;
+  currentUser;
 
 
-  constructor(public authService: AuthService, private firestore: AngularFirestore) {
+  constructor(public authService: AuthService, private firestore: AngularFirestore, public afAuth: AngularFireAuth) {
     this.ref = firestore.collection(this.dbPath);
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
   }
 
 
-  AddCompanyAndAccount(email, password, val) {
-    console.log(email, password, val);
+  async AddCompanyAndAccount(formValue) {
+    localStorage.setItem("PASTUSER", this.currentUser);
+    console.log(formValue); 
+    this.afAuth.createUserWithEmailAndPassword(formValue.email, formValue.password)
+      .then(async (result) => {
+        /* Call the SendVerificaitonMail() function when new user sign 
+        up and returns promise */
+        // this.SendVerificationMail();
+        // this.SetUserData(result.user); 
+        (await this.afAuth.currentUser).sendEmailVerification()
+          .then(() => {
+            alertify.success('Confirmation email sent!');
+          })
+      this.currentUser = JSON.parse(localStorage.getItem('user'));
+      this.afAuth.updateCurrentUser(this.currentUser)
+
+      }).catch((error) => {
+        window.alert(error.message)
+      })
   }
 
   AccountExists(): boolean {
 
     setTimeout(() => {
-      this.firestore.firestore.doc(`companies/${this.user.uid}`).get()
+      this.firestore.firestore.doc(`companies/${this.currentUser.uid}`).get()
         .then(docSnapshot => {
           if (docSnapshot.exists) {
             console.log("Match found.");
